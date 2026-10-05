@@ -1,0 +1,1802 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Voices of the Past</title>
+    <meta name="description" content="An interactive archive of poignant wartime letters and historical memories featuring authentic parchment design, curated atmospheric music, and audio narration." />
+    <meta property="og:title" content="Voices of the Past" />
+    <meta property="og:description" content="An interactive archive of poignant wartime letters and historical memories featuring authentic parchment design, curated atmospheric music, and audio narration." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Google Fonts for authentic historical calligraphy and handwriting -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Caveat:wght@400;500;600;700&family=Cedarville+Cursive&family=Dancing+Script:wght@500;600;700&family=Homemade+Apple&family=Marck+Script&family=Satisfy&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet" />
+
+    <style>
+      /* --- BASE & TYPOGRAPHY --- */
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: #f3ede1;
+        color: #261d15;
+        font-family: 'Source Serif 4', Georgia, serif;
+        min-height: 100vh;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        selection-background-color: #d8c29d;
+      }
+
+      ::selection {
+        background: #d8c29d;
+        color: #1a140f;
+      }
+
+      /* Fonts */
+      .font-script {
+        font-family: 'Caveat', 'Dancing Script', 'Marck Script', cursive;
+      }
+      .font-marck {
+        font-family: 'Marck Script', 'Bad Script', cursive;
+      }
+      .font-cursive-letter {
+        font-family: 'Bad Script', 'Marck Script', 'Caveat', cursive;
+      }
+      .font-flowing-cursive {
+        font-family: 'Marck Script', 'Homemade Apple', cursive;
+      }
+      .font-apple {
+        font-family: 'Homemade Apple', 'Marck Script', cursive;
+      }
+      .font-editorial {
+        font-family: 'Source Serif 4', Georgia, serif;
+      }
+
+      /* --- PARCHMENT BACKGROUND --- */
+      .parchment-bg {
+        background-color: #f3ede1;
+        background-image:
+          radial-gradient(ellipse at center, rgba(255, 252, 245, 0.65) 0%, rgba(240, 230, 214, 0.45) 60%, rgba(206, 189, 163, 0.8) 100%),
+          radial-gradient(circle at 20% 30%, rgba(210, 185, 150, 0.18) 0%, transparent 40%),
+          radial-gradient(circle at 80% 75%, rgba(190, 160, 125, 0.22) 0%, transparent 45%);
+        box-shadow: inset 0 0 140px rgba(135, 105, 70, 0.25);
+        min-height: 100vh;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 1.5rem 1.5rem;
+      }
+
+      @media (min-width: 640px) {
+        .parchment-bg {
+          padding: 2.2rem 2.5rem;
+        }
+      }
+      @media (min-width: 1024px) {
+        .parchment-bg {
+          padding: 2.8rem 3.5rem;
+        }
+      }
+
+      /* Container width constraint */
+      .max-w-content {
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+      }
+
+      /* --- AIRMAIL ENVELOPE (HOME VIEW) --- */
+      .airmail-border {
+        background: repeating-linear-gradient(
+          135deg,
+          #2c5282 0px,
+          #2c5282 18px,
+          #fbf8ee 18px,
+          #fbf8ee 28px,
+          #b93b3b 28px,
+          #b93b3b 46px,
+          #fbf8ee 46px,
+          #fbf8ee 56px
+        );
+      }
+
+      .envelope-wrapper {
+        position: relative;
+        cursor: pointer;
+        user-select: none;
+        transform: rotate(-14deg) scale(0.92) translateY(12px);
+        transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        transform-origin: center center;
+      }
+      .envelope-wrapper:hover {
+        transform: rotate(-12deg) scale(0.96) translateY(4px);
+      }
+
+      .envelope-box {
+        position: relative;
+        width: 290px;
+        height: 200px;
+        border-radius: 8px;
+        box-shadow: 0 25px 50px -12px rgba(60, 35, 15, 0.45);
+        padding: 9px;
+      }
+      @media (min-width: 640px) {
+        .envelope-box {
+          width: 380px;
+          height: 265px;
+          padding: 11px;
+        }
+      }
+      @media (min-width: 1024px) {
+        .envelope-box {
+          width: 440px;
+          height: 305px;
+          padding: 12px;
+        }
+      }
+
+      .envelope-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background-color: #fbf8ee;
+        border-radius: 4px;
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
+      }
+
+      .envelope-lining {
+        position: absolute;
+        inset: 0;
+        background-color: #e7decd;
+        border-radius: 4px;
+        background-image: linear-gradient(to bottom, rgba(120, 70, 30, 0.2), transparent, rgba(120, 70, 30, 0.3));
+      }
+
+      .envelope-top-flap {
+        position: absolute;
+        top: -55px;
+        left: 0;
+        right: 0;
+        height: 65px;
+        clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+        background: linear-gradient(to top, #ded5c2, #ece4d4);
+        filter: drop-shadow(0 -3px 5px rgba(90, 65, 40, 0.18));
+      }
+      @media (min-width: 640px) {
+        .envelope-top-flap {
+          top: -75px;
+          height: 85px;
+        }
+      }
+      @media (min-width: 1024px) {
+        .envelope-top-flap {
+          top: -88px;
+          height: 100px;
+        }
+      }
+
+      /* Burned sheets sticking out */
+      .envelope-sheets {
+        position: absolute;
+        top: -50px;
+        left: 24px;
+        right: 24px;
+        height: 140px;
+        z-index: 10;
+        pointer-events: none;
+      }
+      @media (min-width: 640px) {
+        .envelope-sheets {
+          top: -70px;
+          left: 36px;
+          right: 36px;
+          height: 185px;
+        }
+      }
+      @media (min-width: 1024px) {
+        .envelope-sheets {
+          top: -82px;
+          left: 42px;
+          right: 42px;
+        }
+      }
+
+      .protruding-sheet {
+        position: absolute;
+        left: 0;
+        right: 0;
+        transform-origin: bottom center;
+        transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      .sheet-back {
+        height: 105px;
+        background: linear-gradient(to bottom, #d2b07e 0%, #e8d7b8 15%, #f6edd9 100%);
+        box-shadow: 0 -4px 10px rgba(80, 50, 20, 0.25);
+        clip-path: polygon(0% 25%, 3% 15%, 8% 18%, 15% 10%, 25% 15%, 35% 8%, 45% 16%, 55% 9%, 68% 17%, 78% 10%, 88% 18%, 95% 12%, 100% 22%, 100% 100%, 0% 100%);
+        transform: rotate(-3deg);
+      }
+      .sheet-mid {
+        height: 115px;
+        background: linear-gradient(to bottom, #cfac78 0%, #ecdcb9 18%, #f8f1df 100%);
+        box-shadow: 0 -4px 12px rgba(80, 50, 20, 0.28);
+        clip-path: polygon(0% 22%, 4% 12%, 12% 16%, 22% 8%, 32% 16%, 42% 7%, 54% 15%, 65% 8%, 76% 16%, 86% 9%, 94% 15%, 100% 18%, 100% 100%, 0% 100%);
+        transform: rotate(2deg);
+      }
+      .sheet-front {
+        height: 120px;
+        background: linear-gradient(to bottom, #caa36d 0%, #ebd7b3 20%, #faf3e4 100%);
+        box-shadow: 0 -5px 14px rgba(70, 45, 18, 0.3);
+        clip-path: polygon(0% 26%, 5% 15%, 12% 19%, 20% 9%, 30% 17%, 40% 8%, 50% 15%, 62% 7%, 74% 16%, 84% 8%, 93% 16%, 100% 20%, 100% 100%, 0% 100%);
+        transform: rotate(0deg);
+      }
+      @media (min-width: 640px) {
+        .sheet-back { height: 135px; }
+        .sheet-mid { height: 150px; }
+        .sheet-front { height: 160px; }
+      }
+      @media (min-width: 1024px) {
+        .sheet-back { height: 155px; }
+        .sheet-mid { height: 170px; }
+        .sheet-front { height: 180px; }
+      }
+
+      .envelope-wrapper:hover .sheet-back {
+        transform: translateY(-16px) rotate(-5deg);
+      }
+      .envelope-wrapper:hover .sheet-mid {
+        transform: translateY(-24px) rotate(4deg);
+      }
+      .envelope-wrapper:hover .sheet-front {
+        transform: translateY(-32px) rotate(-1deg);
+      }
+
+      .sheet-scorch {
+        height: 16px;
+        background: linear-gradient(to bottom, #5c3414, #9e6d3a, transparent);
+        opacity: 0.9;
+      }
+
+      /* Envelope flaps overlay */
+      .envelope-side-flap-left {
+        position: absolute;
+        inset: 0;
+        z-index: 20;
+        pointer-events: none;
+        clip-path: polygon(0% 0%, 50% 48%, 0% 100%);
+        background: linear-gradient(135deg, #f7f1e1, #efe4ce);
+        filter: drop-shadow(3px 0 4px rgba(110, 85, 50, 0.15));
+      }
+      .envelope-side-flap-right {
+        position: absolute;
+        inset: 0;
+        z-index: 20;
+        pointer-events: none;
+        clip-path: polygon(100% 0%, 50% 48%, 100% 100%);
+        background: linear-gradient(225deg, #f7f1e1, #efe4ce);
+        filter: drop-shadow(-3px 0 4px rgba(110, 85, 50, 0.15));
+      }
+      .envelope-bottom-flap {
+        position: absolute;
+        inset: 0;
+        z-index: 30;
+        pointer-events: none;
+        clip-path: polygon(0% 100%, 50% 46%, 100% 100%);
+        background: linear-gradient(to top, #ede2cb 0%, #fbf6e8 100%);
+        filter: drop-shadow(0 -3px 6px rgba(100, 70, 40, 0.22));
+      }
+
+      .envelope-click-btn {
+        position: absolute;
+        bottom: 24px;
+        left: 0;
+        right: 0;
+        z-index: 40;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+      @media (min-width: 640px) {
+        .envelope-click-btn { bottom: 36px; }
+      }
+      @media (min-width: 1024px) {
+        .envelope-click-btn { bottom: 44px; }
+      }
+
+      .click-me-text {
+        font-family: 'Caveat', 'Dancing Script', cursive;
+        font-size: 30px;
+        font-weight: 700;
+        color: #233c52;
+        transition: transform 0.2s ease, color 0.2s ease;
+      }
+      @media (min-width: 640px) {
+        .click-me-text { font-size: 38px; }
+      }
+      @media (min-width: 1024px) {
+        .click-me-text { font-size: 46px; }
+      }
+      .envelope-wrapper:hover .click-me-text {
+        color: #122435;
+        transform: scale(1.06);
+      }
+
+      /* --- BURNED PARCHMENT CARDS (FRAME 1) --- */
+      .cards-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-top: 1rem;
+        margin-bottom: 1.5rem;
+      }
+      @media (min-width: 768px) {
+        .cards-row-1 {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1.5rem;
+        }
+        .cards-row-2 {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1.75rem;
+          max-width: 950px;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 1.5rem;
+        }
+      }
+
+      .burnt-card-wrapper {
+        position: relative;
+        cursor: pointer;
+        user-select: none;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+      .burnt-card-wrapper:hover {
+        transform: translateY(-6px) scale(1.025);
+      }
+
+      .burnt-card-inner {
+        position: relative;
+        width: 100%;
+        min-height: 230px;
+        padding: 1.75rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background: radial-gradient(ellipse at 50% 50%, #fbf5e7 0%, #f3e6cd 68%, #debfa0 88%, #9f6e40 96%, #522d14 100%);
+        box-shadow: inset 0 0 26px rgba(85, 48, 22, 0.45), 0 10px 25px rgba(60, 35, 15, 0.25);
+      }
+
+      .card-click-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-family: 'Caveat', 'Dancing Script', cursive;
+        font-size: 26px;
+        font-weight: 700;
+        color: #22394c;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        transition: color 0.15s ease, text-decoration 0.15s ease;
+      }
+      .card-click-btn:hover {
+        color: #0d2133;
+        text-decoration: underline;
+      }
+
+      /* Asymmetric clip paths for deckle burnt paper */
+      .deckle-clip-0 {
+        clip-path: polygon(1% 4%, 18% 1%, 38% 3%, 62% 0%, 82% 2%, 99% 1%, 98% 22%, 100% 48%, 98% 74%, 99% 97%, 82% 98%, 62% 96%, 38% 99%, 18% 97%, 1% 99%, 2% 76%, 0% 49%, 2% 24%);
+      }
+      .deckle-clip-1 {
+        clip-path: polygon(2% 2%, 22% 0%, 44% 3%, 68% 1%, 88% 2%, 99% 3%, 98% 28%, 100% 55%, 97% 80%, 99% 98%, 78% 97%, 56% 99%, 34% 96%, 14% 98%, 1% 97%, 3% 72%, 1% 44%, 3% 20%);
+      }
+      .deckle-clip-2 {
+        clip-path: polygon(0% 3%, 20% 1%, 42% 2%, 65% 0%, 86% 2%, 98% 1%, 100% 25%, 98% 52%, 100% 77%, 98% 99%, 76% 97%, 52% 99%, 30% 97%, 10% 98%, 2% 96%, 1% 70%, 2% 45%, 0% 22%);
+      }
+      .deckle-clip-3 {
+        clip-path: polygon(2% 1%, 25% 3%, 48% 0%, 72% 2%, 92% 1%, 99% 4%, 97% 30%, 100% 58%, 98% 82%, 99% 97%, 75% 99%, 52% 96%, 28% 98%, 8% 97%, 1% 98%, 3% 68%, 1% 40%, 2% 18%);
+      }
+      .deckle-clip-4 {
+        clip-path: polygon(1% 2%, 19% 1%, 40% 3%, 64% 1%, 85% 2%, 99% 2%, 98% 24%, 100% 50%, 97% 76%, 99% 98%, 80% 97%, 58% 99%, 36% 96%, 16% 98%, 1% 96%, 2% 72%, 0% 46%, 2% 22%);
+      }
+
+      /* --- TOP CONTROLS & AUDIO BAR --- */
+      .top-nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 1.5rem;
+      }
+
+      .site-title {
+        font-family: 'Caveat', 'Dancing Script', cursive;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #22394c;
+        cursor: pointer;
+        user-select: none;
+        transition: opacity 0.2s ease;
+      }
+      @media (min-width: 640px) {
+        .site-title { font-size: 3.25rem; }
+      }
+      @media (min-width: 1024px) {
+        .site-title { font-size: 3.8rem; }
+      }
+
+      .audio-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(246, 238, 224, 0.92);
+        backdrop-filter: blur(8px);
+        padding: 0.35rem 0.85rem;
+        border-radius: 9999px;
+        border: 1px solid rgba(160, 140, 115, 0.35);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+        font-size: 0.8rem;
+        color: #3b3024;
+      }
+
+      .btn-icon {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.25rem;
+        border-radius: 9999px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #4a3b2c;
+        transition: background-color 0.15s ease, color 0.15s ease;
+      }
+      .btn-icon:hover {
+        background-color: rgba(180, 160, 135, 0.3);
+        color: #1a120b;
+      }
+
+      .btn-read-aloud {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        background: rgba(220, 205, 180, 0.6);
+        border: 1px solid rgba(160, 140, 115, 0.4);
+        padding: 0.25rem 0.65rem;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        cursor: pointer;
+        color: #2e2215;
+        transition: all 0.15s ease;
+      }
+      .btn-read-aloud:hover {
+        background: rgba(200, 180, 150, 0.8);
+      }
+      .btn-read-aloud.active {
+        background: #78350f;
+        color: #fff;
+        border-color: #78350f;
+      }
+
+      /* Font style selector */
+      .font-switcher {
+        display: inline-flex;
+        align-items: center;
+        background: rgba(220, 205, 180, 0.45);
+        border: 1px solid rgba(160, 140, 115, 0.3);
+        border-radius: 9999px;
+        padding: 2px;
+        font-size: 0.75rem;
+      }
+      .font-switcher-btn {
+        background: none;
+        border: none;
+        padding: 0.25rem 0.65rem;
+        border-radius: 9999px;
+        cursor: pointer;
+        color: #4a3b2c;
+        font-weight: 500;
+        transition: all 0.15s ease;
+      }
+      .font-switcher-btn.active {
+        background: #fbf5e6;
+        color: #1a120b;
+        font-weight: 700;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      }
+
+      /* --- LETTER DETAIL VIEW --- */
+      .letter-container {
+        max-width: 860px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .letter-header-meta {
+        padding-bottom: 1rem;
+        margin-bottom: 1.5rem;
+        border-bottom: 1px solid rgba(140, 115, 85, 0.25);
+      }
+      .letter-header-line {
+        font-size: 1.25rem;
+        color: #4a3c30;
+        line-height: 1.6;
+      }
+
+      .letter-salutation {
+        font-size: 1.7rem;
+        font-weight: 600;
+        color: #1f1710;
+        margin-bottom: 1.25rem;
+        line-height: 1.4;
+      }
+
+      .letter-paragraph {
+        font-size: 1.38rem;
+        line-height: 2.15;
+        margin-bottom: 1.6rem;
+        letter-spacing: 0.015em;
+        color: #241a12;
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .letter-paragraph.highlighted {
+        background-color: rgba(251, 191, 36, 0.28);
+        box-shadow: 0 0 0 1px rgba(217, 119, 6, 0.4);
+        color: #0f0a06;
+      }
+
+      .letter-signoff {
+        margin-top: 2rem;
+        font-size: 1.45rem;
+        line-height: 1.6;
+        color: #1f1710;
+      }
+      .letter-signature {
+        font-family: 'Caveat', 'Dancing Script', cursive;
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: #22394c;
+      }
+
+      .letter-postscript {
+        margin-top: 2rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(140, 115, 85, 0.2);
+        font-size: 1.2rem;
+        font-style: italic;
+        color: #4a3c30;
+        line-height: 1.7;
+      }
+
+      /* History Context Modal */
+      .history-box {
+        background: #fbf5ea;
+        border: 1px solid rgba(120, 53, 15, 0.2);
+        border-radius: 12px;
+        padding: 1.25rem 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 4px 12px rgba(60, 35, 15, 0.08);
+      }
+      .history-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(120, 53, 15, 0.15);
+        padding-bottom: 0.5rem;
+        margin-bottom: 0.75rem;
+      }
+      .history-title {
+        font-family: 'Source Serif 4', Georgia, serif;
+        font-weight: 600;
+        color: #451a03;
+        font-size: 1rem;
+      }
+      .history-body {
+        font-size: 0.9rem;
+        line-height: 1.7;
+        color: #382d22;
+        font-family: 'Source Serif 4', Georgia, serif;
+      }
+
+      /* Bottom letter nav */
+      .letter-footer-nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(140, 115, 85, 0.25);
+        margin-top: 2rem;
+      }
+      .nav-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #4a3b2c;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        transition: background-color 0.15s ease, color 0.15s ease;
+      }
+      .nav-btn:hover:not(:disabled) {
+        background-color: rgba(180, 160, 135, 0.3);
+        color: #1a120b;
+      }
+      .nav-btn:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+
+      /* Subtle pulse indicator */
+      @keyframes pulseSlow {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.4; }
+      }
+      .pulse-indicator {
+        animation: pulseSlow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+
+      /* Custom scrollbars */
+      ::-webkit-scrollbar { width: 7px; }
+      ::-webkit-scrollbar-track { background: #ecdcc6; }
+      ::-webkit-scrollbar-thumb { background: #bfa585; border-radius: 4px; }
+      ::-webkit-scrollbar-thumb:hover { background: #9f8260; }
+    </style>
+  </head>
+  <body>
+    <!-- Main Application Container -->
+    <div id="app" class="parchment-bg"></div>
+
+    <script>
+      /**
+       * HISTORICAL DATA REPOSITORY: FRAMES 2 - 8
+       */
+      const LETTERS = [
+        {
+          id: 'frame-2',
+          frameNumber: 2,
+          author: 'Martyr Pham Dang Nuoi',
+          summaryBullets: [
+            'Martyr Pham Dang Nuoi (born in 1934 in Phu Viet, Thanh Ha, Ha Tinh; his family received his death notice in 1977, but his remains have not yet been found)',
+            'Written to his wife, Mrs. Nguyen Thi Tham, on May 20, 1966 from Thua Thien'
+          ],
+          fullHeader: [
+            'Martyr Pham Dang Nuoi (born in 1934 in Phu Viet, Thanh Ha, Ha Tinh; his family received his death notice in 1977, but his remains have not yet been found)',
+            'Written to his wife, Mrs. Nguyen Thi Tham, on May 20, 1966 from Thua Thien'
+          ],
+          salutation: '"My beloved Tham,',
+          paragraphs: [
+            "Time flies so quickly—it's already been nearly five months. I miss you dearly, and I miss our child beyond words. Every day I wait for your letters, hoping to hear that Mother is in good health. How are you and the children? It's only been five months, but it feels like five years. I miss you so much I can't sleep at night. I miss the jackfruit tree, the orange bush, the broken water pulley (did anyone fix it?) Images of our home live vividly in my memory.",
+            "What worries me most is when you or our child are unwell—who will take care of you, who will help you? But I trust you. You will manage everything for me - not only that, but you'll overcome every hardship, even emotional ones. I channel my longing for you into my work, so as not to let you down, nor to betray the trust of the Party. My dear, is Mother in good health? Are you and the children doing well? Has life at home been harder since I left? Have you managed to raise more chickens or pigs?",
+            "I urge you to raise a few chickens so you can occasionally have some meat for yourself, the children, and Mother. Otherwise, how can we afford to buy it, right, my love? Please teach our children well so they grow up quickly. Don't scold them too harshly—they're little and don't deserve it. I miss you and our children so much. Sometimes I just sit, absent-minded and lost in thought—do you know how I feel? I've sent so many letters home, but I don't know if they've reached you.\""
+          ],
+          biography: 'Pham Dang Nuoi was born in 1934 in Phu Viet, Thach Ha, Ha Tinh province. He fought on the Thua Thien battlefield during one of the most intense periods of the war. His family received his death notice in 1977, but his resting place remains unlocated.',
+          period: '1966 · Thua Thien Battlefield',
+          audioTheme: {
+            title: 'Homeland Longing (Bamboo Flute & Guitar)',
+            preset: 'flute-guitar'
+          }
+        },
+        {
+          id: 'frame-3',
+          frameNumber: 3,
+          author: 'Martyr Pham Khac Duyen',
+          summaryBullets: [
+            'Martyr Pham Khac Duyen (died on March 17, 1975).',
+            'Written to his father on January 1, 1975, from Vinh Linh, Quang Tri'
+          ],
+          fullHeader: [
+            'Martyr Pham Khac Duyen (died on March 17, 1975).',
+            'Written to his father on January 1, 1975, from Vinh Linh, Quang Tri'
+          ],
+          salutation: '"Dear Father,',
+          paragraphs: [
+            "It must be really cold up there now, right? With all this rain, the roads must be so muddy. You're getting older, and working in such weather must be terribly hard. Are you in good health? If you fall ill, it would be such a misfortune for us. I know you've devoted your entire life to the Party, to us, and to the nation. I always remind myself that I must carry out my duty well, to be worthy of you and everyone at home who is working day and night.",
+            "As a soldier on the front lines, I know there will be many hardships and sacrifices. But my sacrifices are nothing compared to those who came before us - so many who laid down their lives for the revolutionary cause. Even so, I am proud to offer this small contribution - both mine and our family's - to the nation and our people. I've only just arrived here, but already I feel I understand our people, our land, and our country even more deeply than ever before. Do you know, Father? I'm standing on Highway 1, looking out on bomb craters stretched across the land. This tiny piece of land in Vinh Linh seems to prohibit any life. And yet, the truth of our country is becoming clearer day by day: no bomb, no force can break us, nor divide our homeland or stop the surging revolutionary tide of our people.",
+            "It is truly a privilege to be part of this campaign - to witness the heroic places of our nation. I've crossed bridges, passed through legendary crossroads and villages. Our trucks snuck through bomb-cratered paths, while the green of new life began to emerge on either side. Youth volunteer brigades work tirelessly to rebuild roads for the convoys. I've walked through the central land of our country, where I imagine your own footsteps once touched the villages and trails. I crossed the Lam River, saw the Hong Linh Mountains, went over deo Ngang, and swam in the seas of Central Vietnam. From the top of Deo Ngang, the scenery below looked like a masterpiece painting. The winding road below sparkled with the headlights of military trucks, like a moving city. The sea stretched endlessly, blending with the sky. Waves crashed with a whispering roar, spraying white foam. Clouds wrapped around the mountains like flowing silk. I crossed the Gianh and Nhat Le rivers, visited the female militia unit that shot down six warships, and went boar hunting in Quang Binh.",
+            "Now I sit on a white sand dune, behind me the sea and whispering casuarina trees, looking out at the strategic road. Convoys stream past like shuttles in a loom, carrying countless soldiers, weapons, and supplies for the South. Here, the strength of our forces and the optimism of the revolution are clearer than ever. We're eating well, fully supplied. We've begun living under full 'Regime B' now - mostly canned and dried food - so we really crave fresh greens. Every day, we forage for wild vegetables to make soup. We might need to march for several days on foot due to the heavy rains and poor roads. The people here are unbelievably good-hearted and resilient, even poorer than the North due to constant war, yet they give everything they can to support us. Some even dismantled their own homes to make way for roads. There are rarely homes without soldiers staying over. People remain on high alert, militias armed like regular troops, with strong combat skills. Just recently, they captured a commando group! I'm always surrounded by the love of the people, my comrades, and fellow soldiers - so please don't worry about me.",
+            "Tet is coming. Has our family prepared anything yet, Father? This New Year brings so much hope. I wish I could come home to celebrate with you. But for my duties, I can't help you or sit with you to wrap banh chung and welcome the New Year. I wish you a new year full of health and success. Please send my greetings to all our relatives, uncles, aunts, and to Nguyen and Hung as well!\""
+          ],
+          biography: 'Pham Khac Duyen was deployed through the legendary 17th parallel and Vinh Linh at the beginning of 1975. He was martyred on March 17, 1975, only weeks before national reunification.',
+          period: 'January 1975 · Vinh Linh, Quang Tri',
+          audioTheme: {
+            title: 'Passage at Deo Ngang (Epic Strings & Waves)',
+            preset: 'ocean-heroic'
+          }
+        },
+        {
+          id: 'frame-4',
+          frameNumber: 4,
+          author: 'Colonel Do Sam',
+          summaryBullets: [
+            'Colonel Do Sam. (He once served in the artillery regiment of North Vietnam)',
+            'Written to his wife on June 1968'
+          ],
+          fullHeader: [
+            'Colonel Do Sam. (He once served in the artillery regiment of North Vietnam)',
+            'Written to his wife on June 1968'
+          ],
+          salutation: '',
+          paragraphs: [
+            "\"You asked me what I remember most when I think of you. I remember the atmosphere of our wedding... I remember our little warm room filled with countless memories. I still do... Right after the wedding, I had to leave again to defend the coastline. We had such little time together before I was stationed in the South, my love. The more I think about it, the more I empathize with you. That's why I'm so determined to defend our nation - so that millions of couples like us can live in happiness, my dear.",
+            "Last night, our convoy kept moving southward. This morning, I finally had a moment to sit down and write to you. Surrounding me were the sounds of flowing streams and rustling leaves, as if nature itself were celebrating our love. I cannot wait for the day of final victory, when we reunite. Then we can live with a joy more intense than anything else, right, my love? Wishing you good health and endless longing for your own...\"",
+            "\"Though you're always in my thoughts, I must focus all my strength on this task: to help bring our people's struggle to victory. I've made a promise to myself: only when the South is free and independent, when joy returns to all, will I focus on building a life for just you and me. Only then can I truly devote myself to our family, my dear...\""
+          ],
+          biography: 'Colonel Do Sam served with North Vietnam’s artillery division. Shortly after marrying, he departed for the southern frontlines to defend coastal positions.',
+          period: 'June 1968 · Southern Route',
+          audioTheme: {
+            title: 'Vow by the Mountain Stream (Cello & Leaves)',
+            preset: 'cello-stream'
+          }
+        },
+        {
+          id: 'frame-5',
+          frameNumber: 5,
+          author: 'Martyr Van Minh',
+          summaryBullets: [
+            'Martyr Van Minh',
+            'Written to his family on September 21st, 1972'
+          ],
+          fullHeader: [
+            'Martyr Van Minh',
+            'Written to his family on September 21st, 1972'
+          ],
+          salutation: 'Thanh Hóa, September 21, 1972\nBeloved Grandma and Parents, Aunts and Uncles, and My Dear Younger Siblings,',
+          paragraphs: [
+            "After attending sessions on the policies and criteria for deployment to the South, I felt an overwhelming longing for home and deep love for you all. I'm writing to let you know that I am preparing to go into battle.",
+            "First of all, I wish you all good health, a productive life, and all the best. That would make me very happy to know. We arrived in Thanh Hóa more than two weeks ago. At the moment, we are resting, eating two communal meals a day, and undergoing urgent tactical training. By the end of this month, we will be leaving the North.",
+            "Mom, Dad - when going into battle, we are not granted leave to go home, and that makes me very sad. I feel deeply sorry for Grandma and both of you. Since the night of September 19th, when we received the order to prepare for deployment, my heart has been full of thoughts of all you've done to raise me. Now I must part from you.",
+            "Grandma, Mom, Dad - there's just over half a month left before I must leave the North and say goodbye to all of you. I will have to part with my five beloved and innocent younger siblings. I must leave behind a life full of love and warmth, and instead live a life surrounded by hardship, with little affection or comfort. A life where death and life try to overpower each other by the minute. But I still hold onto hope - that one day I will return to live in the love and warmth of our family and homeland. Please don't worry too much about me, and especially take care of your health. I'm going into battle far away, yes - but I truly believe I will return. Don't cry too much. That's my heartfelt request. It's late now, so I'll end this letter here. I send my wishes for peace and good fortune to our entire family and all our loved ones."
+          ],
+          signOff: 'Your grandson, your son,\nVan Minh',
+          biography: 'Young recruit Van Minh underwent intensive tactical training in Thanh Hoa before deployment to the southern frontlines during the intense mobilization of Autumn 1972.',
+          period: 'September 1972 · Thanh Hoa Mobilization',
+          audioTheme: {
+            title: 'Lullaby for the Departure (Piano & Rain)',
+            preset: 'lullaby-piano'
+          }
+        },
+        {
+          id: 'frame-6',
+          frameNumber: 6,
+          author: 'Dang Thuy Tram',
+          summaryBullets: [
+            'Dang Thuy Tram (1942–1970, a doctor and a martyr of the Vietnam War, remembered for the moving wartime diaries she wrote while serving as a battlefield physician in Quang Ngai province.)',
+            'Written to her parents on March 8, 1964'
+          ],
+          fullHeader: [
+            'Đặng Thùy Trâm (1942–1970, a doctor and a martyr of the Vietnam War, remembered for the moving wartime diaries she wrote while serving as a battlefield physician in Quảng Ngãi province.)',
+            'Written to her parents on March 8, 1964:',
+            'March 8th, 1964'
+          ],
+          salutation: '"My dearest parents,',
+          paragraphs: [
+            "The Lunar New Year has just passed, and I wasn't able to send a letter home in time to you, only to Hiền, since I received her letter right on New Year's Eve. Even though Tết is over, I still want to send my New Year's wishes in this letter - from a daughter who, no matter where she is or what situation she's in, always thinks of her parents and family. Truly, Pa and Ma, this past Tết was one where I felt very full - both materially and spiritually. I received many letters from friends that helped ease homesickness. There were so many cakes and sweets, even more than what people in the lowlands had to celebrate. I still had leftover treats even by the 15th of the first lunar month. And yet... something still felt missing. I missed our traditional New Year's Eve dinner - the pork skin soup, the pork hock stew with glass noodles, the pickled salad. I missed the flurry of preparations and house decorating. But well, there's no other way than to wait for the day of reunification, when I can once again live fully in your love and our family up North.",
+            "Pa and Ma, I'm not sure if you've been receiving the letters I've sent. I've received many from the North - from friends and family - but none from you in the past six months. I'm so encouraged to hear that the family is well and progressing in many ways. But I still don't know much about your living conditions. Has life been difficult? Has anything improved since the fighting stopped? Please tell me in your next letters, Pa and Ma. Sometimes I long to send something back to you, anything, as a token of your daughter's love. I've grown up without contributing much to the family, but there are many others like me now. As for me, please don't worry - I'm living quite comfortably in all aspects. In the past two years, I've matured a lot. In my work, I've made progress and earned the trust of others - in my medical skills, teaching, organizing, leadership, and even my approach to the public. Many people here care deeply for me - they often say I'm like the beloved child of both the province and the entire region. Recently, during the provincial medical sector's annual review, the clinic I'm in charge of was ranked best in the province and is being nominated for a Second-Class Liberation Medal (the highest class in the province). I myself was recognized as an Outstanding Individual. I don't let this praise go to my head - it only pushes me to try harder to be worthy of such affection.",
+            "In terms of material life, Đức Phổ is the most comfortable place I've been. It's a rich area - mainly rich in love for the revolutionary cadres. I'm spoiled here - people send me all kinds of gifts. I probably live better than most in my agency. Because we're fighting the Americans, most of our gear is American - from our hammocks, mosquito nets, spoons, and cups, to the coffee we drink. Even our candy must be up to par - like Hải Châu sweets. We don't bother with low-quality ones like nougat. As for clothing and supplies, it's all Japanese - everything is 'Made in Japan,' from the fabric to the beautiful, durable nylon material we love because it dries fast. My Sony radio is Japanese too - I think Pa would love it. It's tiny and works great. Here, farmers have a high standard of living. Radios are common, motorcycles are standard - no one really uses bicycles. Even TVs aren't rare. They're about one and a half times the price of my radio, but we don't buy them because they use too much power. They're only practical with electricity. So yes, even though life here is harsh, it's also full of comfort. The greatest joy is being surrounded by boundless love from so many people.",
+            "I'm still working with the District Youth Union. If I had more time, I'd be involved with the provincial Liberation Youth Union too. Don't worry, Pa and Ma. I hope I can return to you and the family in the not-so-distant future."
+          ],
+          signOff: 'Love,\nThùy',
+          postScript: 'P.S. Please send my regards to Aunt Tuyến, Aunt Hòa, and my cousins Kim Anh, Hoàng Anh, Phương Đông, and all the aunties and uncles who work with Má.',
+          biography: 'Dr. Dang Thuy Tram graduated from Hanoi Medical University in 1966 and volunteered to serve as head of a secret field clinic in Duc Pho, Quang Ngai. She was killed in action on June 22, 1970, at age 27. Her diaries were published worldwide as "Last Night I Dreamed of Peace".',
+          period: '1964–1970 · Duc Pho, Quang Ngai',
+          audioTheme: {
+            title: 'Duc Pho Melody (Acoustic Guitar)',
+            preset: 'pastoral-acoustic'
+          }
+        },
+        {
+          id: 'frame-7',
+          frameNumber: 7,
+          author: 'Martyr Le Van Huynh',
+          summaryBullets: [
+            'Martyr Le Van Huynh (Written days before his death in the fierce battle of Quang Tri Citadel 1972)',
+            'Written to his mother, his beloved wife Dang Thi Xo, and his family'
+          ],
+          fullHeader: [
+            'Martyr Lê Văn Huỳnh (Student of Hanoi University of Civil Engineering, martyred on January 2, 1973 in Quảng Trị)',
+            'Written in the trenches of the Ancient Citadel on September 11, 1972'
+          ],
+          salutation: '"Dearest Mother, and my beloved Xơ,',
+          paragraphs: [
+            "Today, I sit in the underground bunker beneath the roaring artillery fire to write these lines to you both. Outside, the smoke never clears and the earth trembles day and night. If I should fall in this battle, Mother, please do not grieve excessively. Your son has fulfilled his duty to the homeland, worthy of the sacrifices you endured to raise me.",
+            "And to my dear Xơ—we had only been married for three days before I had to depart for the front. In those three short days, you gave me a lifetime of love and strength. If I do not return, please find happiness and rebuild your life; do not let your youth waste away in mourning for me. Always love and care for Mother as your own.",
+            "I have etched our memories into my heart. Let the peace we are fighting for blossom into a gentle tomorrow for everyone we love.\""
+          ],
+          signOff: 'Your son, your loving husband,\nLê Văn Huỳnh',
+          biography: 'Le Van Huynh was a fourth-year student at Hanoi University of Civil Engineering who enlisted in 1972. His 10-page farewell letter written inside the bomb-torn citadel is preserved at the Quang Tri Citadel Museum as a national historical treasure.',
+          period: 'Autumn 1972 · 81 Days and Nights of Quang Tri Citadel',
+          audioTheme: {
+            title: 'Citadel Echoes (Memorial Chimes & Strings)',
+            preset: 'solemn-citadel'
+          }
+        },
+        {
+          id: 'frame-8',
+          frameNumber: 8,
+          author: 'Martyr Nguyen Van Thac',
+          summaryBullets: [
+            'Martyr Nguyen Van Thac (1952–1972, literature student at Hanoi University)',
+            'Author of poignant battlefield diary "Forever Twenty"'
+          ],
+          fullHeader: [
+            'Nguyễn Văn Thạc (1952–1972, Outstanding Literature Student, martyred in Quảng Trị at age 20)',
+            'Excerpts from letters and diary "Forever Twenty", June 1972'
+          ],
+          salutation: '"To beloved Nhu Anh, and my dearest family,',
+          paragraphs: [
+            "I am marching toward the battlefield, where the sky is filled with clouds and fire. At twenty years old, how vast and magnificent life feels. Every step along the Truong Son mountains feels like writing poetry with our own youth and footprints.",
+            "I do not fear hardships or dangers. What matters most is that our generation lives meaningfully, carrying the dreams of our nation upon our shoulders. If we triumph, we shall return and meet at the gates of Hanoi University on April 30, 1975—remember that date!",
+            "Until the day of peace and reunion, keep your faith burning bright. Youth given to the country will live forever in the skies and rivers of our homeland.\""
+          ],
+          signOff: 'Forever twenty,\nNguyễn Văn Thạc',
+          biography: 'Nguyen Van Thac was the first-prize winner of Hanoi’s city-wide literature contest. He deferred his university studies to enlist. His diary and letters predicted the exact year of victory before he fell in battle at age 20.',
+          period: '1972 · Truong Son Trail and Quang Tri',
+          audioTheme: {
+            title: 'Forever Twenty (Youthful Poetry & Acoustic)',
+            preset: 'youthful-poetry'
+          }
+        }
+      ];
+
+      /**
+       * PROCEDURAL WEB AUDIO SYNTHESIS ENGINE
+       */
+      class SoundEngine {
+        constructor() {
+          this.ctx = null;
+          this.masterGain = null;
+          this.musicGain = null;
+          this.ambientGain = null;
+          this.sfxGain = null;
+          this.isMuted = false;
+          this.volume = 0.65;
+          this.isMusicPlaying = false;
+          this.loopTimer = null;
+          this.ambientNodes = [];
+        }
+
+        initContext() {
+          if (!this.ctx) {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            this.ctx = new AudioCtx();
+
+            this.masterGain = this.ctx.createGain();
+            this.masterGain.gain.setValueAtTime(this.isMuted ? 0 : this.volume, this.ctx.currentTime);
+            this.masterGain.connect(this.ctx.destination);
+
+            this.musicGain = this.ctx.createGain();
+            this.musicGain.gain.setValueAtTime(0.7, this.ctx.currentTime);
+            this.musicGain.connect(this.masterGain);
+
+            this.ambientGain = this.ctx.createGain();
+            this.ambientGain.gain.setValueAtTime(0.35, this.ctx.currentTime);
+            this.ambientGain.connect(this.masterGain);
+
+            this.sfxGain = this.ctx.createGain();
+            this.sfxGain.gain.setValueAtTime(0.8, this.ctx.currentTime);
+            this.sfxGain.connect(this.masterGain);
+          }
+          if (this.ctx.state === 'suspended') {
+            this.ctx.resume();
+          }
+        }
+
+        setVolume(vol) {
+          this.volume = Math.max(0, Math.min(1, vol));
+          if (this.masterGain && this.ctx) {
+            this.masterGain.gain.setTargetAtTime(this.isMuted ? 0 : this.volume, this.ctx.currentTime, 0.05);
+          }
+        }
+
+        toggleMute() {
+          this.isMuted = !this.isMuted;
+          if (this.masterGain && this.ctx) {
+            this.masterGain.gain.setTargetAtTime(this.isMuted ? 0 : this.volume, this.ctx.currentTime, 0.05);
+          }
+          return this.isMuted;
+        }
+
+        playPaperRustle() {
+          try {
+            this.initContext();
+            if (!this.ctx || !this.sfxGain) return;
+            const now = this.ctx.currentTime;
+            const bufferSize = this.ctx.sampleRate * 0.4;
+            const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+            const data = buffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+
+            const noise = this.ctx.createBufferSource();
+            noise.buffer = buffer;
+            const filter = this.ctx.createBiquadFilter();
+            filter.type = 'bandpass';
+            filter.frequency.setValueAtTime(1400, now);
+            filter.frequency.exponentialRampToValueAtTime(700, now + 0.35);
+            filter.Q.setValueAtTime(2.5, now);
+
+            const gain = this.ctx.createGain();
+            gain.gain.setValueAtTime(0.01, now);
+            gain.gain.linearRampToValueAtTime(0.25, now + 0.08);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.38);
+
+            noise.connect(filter);
+            filter.connect(gain);
+            gain.connect(this.sfxGain);
+
+            noise.start(now);
+            noise.stop(now + 0.4);
+          } catch(e) {}
+        }
+
+        playPenScratch() {
+          try {
+            this.initContext();
+            if (!this.ctx || !this.sfxGain) return;
+            const now = this.ctx.currentTime;
+            const osc = this.ctx.createOscillator();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(1200 + Math.random() * 600, now);
+            osc.frequency.exponentialRampToValueAtTime(800, now + 0.07);
+
+            const gain = this.ctx.createGain();
+            gain.gain.setValueAtTime(0.05, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.07);
+
+            osc.connect(gain);
+            gain.connect(this.sfxGain);
+            osc.start(now);
+            osc.stop(now + 0.08);
+          } catch(e) {}
+        }
+
+        playChime(freq = 660) {
+          try {
+            this.initContext();
+            if (!this.ctx || !this.sfxGain) return;
+            const now = this.ctx.currentTime;
+            const osc = this.ctx.createOscillator();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, now);
+
+            const gain = this.ctx.createGain();
+            gain.gain.setValueAtTime(0.18, now);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.2);
+
+            osc.connect(gain);
+            gain.connect(this.sfxGain);
+            osc.start(now);
+            osc.stop(now + 1.2);
+          } catch(e) {}
+        }
+
+        playPluck(freq, type = 'guitar', duration = 2.4) {
+          if (!this.ctx || !this.musicGain) return;
+          try {
+            const now = this.ctx.currentTime;
+            if (type === 'flute') {
+              const osc = this.ctx.createOscillator();
+              osc.type = 'sine';
+              osc.frequency.setValueAtTime(freq, now);
+
+              const vibrato = this.ctx.createOscillator();
+              vibrato.frequency.setValueAtTime(5.2, now);
+              const vibGain = this.ctx.createGain();
+              vibGain.gain.setValueAtTime(freq * 0.02, now);
+              vibrato.connect(vibGain);
+              vibGain.connect(osc.frequency);
+              vibrato.start(now);
+              vibrato.stop(now + duration);
+
+              const gain = this.ctx.createGain();
+              gain.gain.setValueAtTime(0.001, now);
+              gain.gain.linearRampToValueAtTime(0.14, now + 0.2);
+              gain.gain.setValueAtTime(0.12, now + duration - 0.4);
+              gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+              osc.connect(gain);
+              gain.connect(this.musicGain);
+              osc.start(now);
+              osc.stop(now + duration);
+            } else if (type === 'cello') {
+              const osc = this.ctx.createOscillator();
+              osc.type = 'sawtooth';
+              osc.frequency.setValueAtTime(freq, now);
+              const filter = this.ctx.createBiquadFilter();
+              filter.type = 'lowpass';
+              filter.frequency.setValueAtTime(450, now);
+
+              const gain = this.ctx.createGain();
+              gain.gain.setValueAtTime(0.001, now);
+              gain.gain.linearRampToValueAtTime(0.12, now + 0.4);
+              gain.gain.setValueAtTime(0.1, now + duration - 0.5);
+              gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+              osc.connect(filter);
+              filter.connect(gain);
+              gain.connect(this.musicGain);
+              osc.start(now);
+              osc.stop(now + duration);
+            } else if (type === 'piano') {
+              const osc1 = this.ctx.createOscillator();
+              const osc2 = this.ctx.createOscillator();
+              osc1.type = 'triangle';
+              osc2.type = 'sine';
+              osc1.frequency.setValueAtTime(freq, now);
+              osc2.frequency.setValueAtTime(freq * 2, now);
+
+              const g1 = this.ctx.createGain();
+              const g2 = this.ctx.createGain();
+              g1.gain.setValueAtTime(0.12, now);
+              g1.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+              g2.gain.setValueAtTime(0.04, now);
+              g2.gain.exponentialRampToValueAtTime(0.0001, now + duration * 0.7);
+
+              osc1.connect(g1);
+              osc2.connect(g2);
+              g1.connect(this.musicGain);
+              g2.connect(this.musicGain);
+              osc1.start(now);
+              osc2.start(now);
+              osc1.stop(now + duration);
+              osc2.stop(now + duration);
+            } else {
+              const osc = this.ctx.createOscillator();
+              osc.type = 'triangle';
+              osc.frequency.setValueAtTime(freq, now);
+              const filter = this.ctx.createBiquadFilter();
+              filter.type = 'lowpass';
+              filter.frequency.setValueAtTime(1400, now);
+              filter.frequency.exponentialRampToValueAtTime(300, now + duration);
+
+              const gain = this.ctx.createGain();
+              gain.gain.setValueAtTime(0.14, now);
+              gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+              osc.connect(filter);
+              filter.connect(gain);
+              gain.connect(this.musicGain);
+              osc.start(now);
+              osc.stop(now + duration);
+            }
+          } catch(e) {}
+        }
+
+        playTheme(preset) {
+          this.initContext();
+          this.isMusicPlaying = true;
+          this.stopTheme(false);
+          this.startAmbientNoise(preset);
+          this.startMelody(preset);
+        }
+
+        stopTheme(markStopped = true) {
+          if (this.loopTimer) {
+            clearInterval(this.loopTimer);
+            this.loopTimer = null;
+          }
+          for (const node of this.ambientNodes) {
+            try {
+              if (node.source && node.source.stop) node.source.stop();
+              if (node.source) node.source.disconnect();
+              if (node.gain) node.gain.disconnect();
+              if (node.filter) node.filter.disconnect();
+            } catch(e) {}
+          }
+          this.ambientNodes = [];
+          if (markStopped) this.isMusicPlaying = false;
+        }
+
+        startAmbientNoise(preset) {
+          if (!this.ctx || !this.ambientGain) return;
+          try {
+            const now = this.ctx.currentTime;
+            const bufferSize = this.ctx.sampleRate * 2;
+            const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+            const data = buffer.getChannelData(0);
+            let b0 = 0, b1 = 0, b2 = 0;
+            for (let i = 0; i < bufferSize; i++) {
+              const white = Math.random() * 2 - 1;
+              b0 = 0.99886 * b0 + white * 0.0555179;
+              b1 = 0.99332 * b1 + white * 0.0750759;
+              b2 = 0.96900 * b2 + white * 0.1538520;
+              data[i] = (b0 + b1 + b2 + white * 0.5362) * 0.11;
+            }
+
+            const noise = this.ctx.createBufferSource();
+            noise.buffer = buffer;
+            noise.loop = true;
+            const filter = this.ctx.createBiquadFilter();
+            const gain = this.ctx.createGain();
+
+            if (preset === 'ocean-heroic') {
+              filter.type = 'lowpass';
+              filter.frequency.setValueAtTime(320, now);
+              gain.gain.setValueAtTime(0.18, now);
+            } else if (preset === 'cello-stream') {
+              filter.type = 'bandpass';
+              filter.frequency.setValueAtTime(900, now);
+              gain.gain.setValueAtTime(0.12, now);
+            } else if (preset === 'lullaby-piano') {
+              filter.type = 'lowpass';
+              filter.frequency.setValueAtTime(1200, now);
+              gain.gain.setValueAtTime(0.14, now);
+            } else {
+              filter.type = 'bandpass';
+              filter.frequency.setValueAtTime(550, now);
+              gain.gain.setValueAtTime(0.08, now);
+            }
+
+            noise.connect(filter);
+            filter.connect(gain);
+            gain.connect(this.ambientGain);
+            noise.start(now);
+            this.ambientNodes.push({ source: noise, gain, filter });
+          } catch(e) {}
+        }
+
+        startMelody(preset) {
+          let step = 0;
+          const notes = {
+            C3: 130.81, D3: 146.83, E3: 164.81, F3: 174.61, G3: 196.00, A3: 220.00, B3: 246.94,
+            C4: 261.63, D4: 293.66, E4: 329.63, F4: 349.23, G4: 392.00, A4: 440.00, B4: 493.88,
+            C5: 523.25, D5: 587.33, E5: 659.25, G5: 783.99, A5: 880.00
+          };
+
+          const runStep = () => {
+            if (!this.isMusicPlaying) return;
+            if (preset === 'flute-guitar') {
+              const pattern = [
+                { guitar: [notes.C3, notes.G3, notes.E4], flute: notes.G4 },
+                { guitar: [notes.A3, notes.E4, notes.C4], flute: notes.A4 },
+                { guitar: [notes.F3, notes.C4, notes.A4], flute: notes.C5 },
+                { guitar: [notes.G3, notes.D4, notes.B3], flute: notes.D5 },
+                { guitar: [notes.A3, notes.E4, notes.C4], flute: notes.E5 },
+                { guitar: [notes.G3, notes.D4, notes.G4], flute: notes.D5 },
+                { guitar: [notes.F3, notes.C4, notes.A4], flute: notes.C5 },
+                { guitar: [notes.C3, notes.G3, notes.E4], flute: notes.G4 }
+              ];
+              const cur = pattern[step % pattern.length];
+              cur.guitar.forEach((f, idx) => setTimeout(() => this.playPluck(f, 'guitar', 2.8), idx * 120));
+              if (cur.flute) setTimeout(() => this.playPluck(cur.flute, 'flute', 3.2), 300);
+            } else if (preset === 'ocean-heroic') {
+              const pattern = [
+                { chord: [notes.A3, notes.E4, notes.A4], lead: notes.C5 },
+                { chord: [notes.F3, notes.C4, notes.A4], lead: notes.E5 },
+                { chord: [notes.D3, notes.A3, notes.F4], lead: notes.D5 },
+                { chord: [notes.E3, notes.B3, notes.G4], lead: notes.B4 },
+                { chord: [notes.A3, notes.E4, notes.C5], lead: notes.A4 },
+                { chord: [notes.G3, notes.D4, notes.B4], lead: notes.G4 }
+              ];
+              const cur = pattern[step % pattern.length];
+              cur.chord.forEach((f, idx) => setTimeout(() => this.playPluck(f, 'cello', 3.8), idx * 180));
+              if (cur.lead) setTimeout(() => this.playPluck(cur.lead, 'flute', 3.2), 450);
+            } else if (preset === 'cello-stream') {
+              const pattern = [
+                { cello: notes.C3, arp: [notes.E3, notes.G3, notes.C4] },
+                { cello: notes.A3, arp: [notes.C4, notes.E4, notes.A4] },
+                { cello: notes.F3, arp: [notes.A3, notes.C4, notes.F4] },
+                { cello: notes.G3, arp: [notes.B3, notes.D4, notes.G4] }
+              ];
+              const cur = pattern[step % pattern.length];
+              this.playPluck(cur.cello, 'cello', 3.4);
+              cur.arp.forEach((f, idx) => setTimeout(() => this.playPluck(f, 'piano', 2.2), (idx + 1) * 220));
+            } else if (preset === 'lullaby-piano') {
+              const pattern = [
+                { root: notes.A3, melody: [notes.E4, notes.A4, notes.C5, notes.B4] },
+                { root: notes.F3, melody: [notes.C4, notes.F4, notes.A4, notes.G4] },
+                { root: notes.D3, melody: [notes.A3, notes.D4, notes.F4, notes.E4] },
+                { root: notes.E3, melody: [notes.B3, notes.E4, notes.G4, notes.E4] }
+              ];
+              const cur = pattern[step % pattern.length];
+              this.playPluck(cur.root, 'piano', 3.6);
+              cur.melody.forEach((f, idx) => setTimeout(() => this.playPluck(f, 'piano', 2.0), (idx + 1) * 350));
+            } else {
+              const pattern = [
+                { notes: [notes.G3, notes.D4, notes.G4, notes.B4] },
+                { notes: [notes.C3, notes.G3, notes.E4, notes.G4] },
+                { notes: [notes.D3, notes.A3, notes.F4, notes.A4] },
+                { notes: [notes.E3, notes.B3, notes.G4, notes.E4] }
+              ];
+              const cur = pattern[step % pattern.length];
+              cur.notes.forEach((f, idx) => setTimeout(() => this.playPluck(f, 'guitar', 2.5), idx * 240));
+            }
+            step++;
+          };
+
+          runStep();
+          this.loopTimer = setInterval(runStep, 2600);
+        }
+      }
+
+      const soundEngine = new SoundEngine();
+
+      /**
+       * WEB SPEECH NARRATION SERVICE
+       */
+      class SpeechService {
+        constructor() {
+          this.synth = window.speechSynthesis || null;
+          this.isSpeaking = false;
+          this.isPaused = false;
+          this.paragraphs = [];
+          this.currentIndex = -1;
+          this.onParagraphChange = null;
+          this.onFinish = null;
+        }
+
+        start(paragraphs, onParagraphChange, onFinish) {
+          if (!this.synth) return;
+          this.stop();
+          this.paragraphs = paragraphs;
+          this.onParagraphChange = onParagraphChange;
+          this.onFinish = onFinish;
+          this.currentIndex = 0;
+          this.isSpeaking = true;
+          this.isPaused = false;
+          this.readNext();
+        }
+
+        readNext() {
+          if (!this.synth || !this.isSpeaking) return;
+          if (this.currentIndex >= this.paragraphs.length) {
+            this.stop();
+            if (this.onFinish) this.onFinish();
+            return;
+          }
+          if (this.onParagraphChange) this.onParagraphChange(this.currentIndex);
+
+          const text = this.paragraphs[this.currentIndex];
+          const utter = new SpeechSynthesisUtterance(text);
+          utter.rate = 0.92;
+          utter.pitch = 0.98;
+
+          const voices = this.synth.getVoices();
+          const voice = voices.find(v => v.lang.startsWith('en'));
+          if (voice) utter.voice = voice;
+
+          utter.onend = () => {
+            if (this.isSpeaking && !this.isPaused) {
+              this.currentIndex++;
+              setTimeout(() => this.readNext(), 450);
+            }
+          };
+          utter.onerror = () => {
+            this.stop();
+          };
+
+          this.synth.speak(utter);
+        }
+
+        pause() {
+          if (this.synth && this.isSpeaking) {
+            this.synth.pause();
+            this.isPaused = true;
+          }
+        }
+
+        resume() {
+          if (this.synth && this.isSpeaking) {
+            this.synth.resume();
+            this.isPaused = false;
+          }
+        }
+
+        stop() {
+          if (this.synth) this.synth.cancel();
+          this.isSpeaking = false;
+          this.isPaused = false;
+          this.currentIndex = -1;
+          if (this.onParagraphChange) this.onParagraphChange(-1);
+        }
+      }
+
+      const speechService = new SpeechService();
+
+      /**
+       * APPLICATION STATE & UI RENDERER
+       */
+      const state = {
+        view: 'home', // 'home' | 'frame-1' | 'letter'
+        selectedLetter: null,
+        fontMode: 'cursive', // 'cursive' | 'marck' | 'apple' | 'serif'
+        showHistory: false,
+        showExtraCards: false,
+        highlightedParagraph: -1,
+        isAudioPlaying: false,
+        isNarrating: false,
+        isNarratePaused: false
+      };
+
+      function render() {
+        const app = document.getElementById('app');
+        if (state.view === 'home') {
+          app.innerHTML = renderHome();
+        } else if (state.view === 'frame-1') {
+          app.innerHTML = renderFrame1();
+        } else if (state.view === 'letter' && state.selectedLetter) {
+          app.innerHTML = renderLetterDetail();
+        }
+        attachEventListeners();
+      }
+
+      // 1. HOME VIEW
+      function renderHome() {
+        return `
+          <header class="top-nav max-w-content">
+            <h1 class="site-title" onclick="navigateTo('home')">Voices of the past</h1>
+            ${renderAudioBar()}
+          </header>
+
+          <main style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 0; margin-top: 1rem;">
+            <div class="envelope-wrapper" id="envelope-hero" onclick="navigateTo('frame-1')">
+              <div class="envelope-box airmail-border">
+                <div class="envelope-inner">
+                  <div class="envelope-lining"></div>
+                  <div class="envelope-top-flap"></div>
+
+                  <!-- 3 Scorched Parchment Sheets Inside Envelope -->
+                  <div class="envelope-sheets">
+                    <div class="protruding-sheet sheet-back">
+                      <div class="sheet-scorch"></div>
+                    </div>
+                    <div class="protruding-sheet sheet-mid">
+                      <div class="sheet-scorch"></div>
+                    </div>
+                    <div class="protruding-sheet sheet-front">
+                      <div class="sheet-scorch"></div>
+                      <div style="padding: 12px; opacity: 0.25;">
+                        <div style="height: 4px; background: #443020; width: 75%; border-radius: 2px; margin-bottom: 6px;"></div>
+                        <div style="height: 4px; background: #443020; width: 85%; border-radius: 2px; margin-bottom: 6px;"></div>
+                        <div style="height: 4px; background: #443020; width: 65%; border-radius: 2px;"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Envelope Front Flaps -->
+                  <div class="envelope-side-flap-left"></div>
+                  <div class="envelope-side-flap-right"></div>
+                  <div class="envelope-bottom-flap"></div>
+
+                  <!-- Click me Button -->
+                  <div class="envelope-click-btn">
+                    <span class="click-me-text">Click me</span>
+                  </div>
+                </div>
+              </div>
+
+              <p style="margin-top: 1.5rem; text-align: center; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(80,60,40,0.7); font-family: sans-serif;">
+                Click envelope or &ldquo;Click me&rdquo; to unfold letters
+              </p>
+            </div>
+          </main>
+
+          <footer class="max-w-content" style="border-top: 1px solid rgba(140,115,85,0.25); padding-top: 1rem; display: flex; justify-content: space-between; font-size: 0.75rem; color: #6e5d4e; font-family: sans-serif;">
+            <div>Vietnam War Historical Letter Archive · Preserved Memories</div>
+            <div>Click envelope to enter Frame 1</div>
+          </footer>
+        `;
+      }
+
+      // 2. FRAME 1: COLLECTION VIEW
+      function renderFrame1() {
+        const row1 = LETTERS.slice(0, 3);
+        const row2 = LETTERS.slice(3, 5);
+        const extras = LETTERS.slice(5);
+
+        return `
+          <header class="top-nav max-w-content">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <button class="btn-icon" onclick="navigateTo('home')" title="Back to Home" style="font-size: 1.5rem;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+              </button>
+              <h1 class="site-title" onclick="navigateTo('home')">Voices of the past</h1>
+            </div>
+            ${renderAudioBar()}
+          </header>
+
+          <main class="max-w-content" style="flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 1rem 0;">
+            <!-- Row 1: 3 Burned Parchment Cards (Frames 2, 3, 4) -->
+            <div class="cards-row-1">
+              ${row1.map((letter, idx) => renderCard(letter, idx, `deckle-clip-${idx % 5}`)).join('')}
+            </div>
+
+            <!-- Row 2: 2 Burned Parchment Cards (Frames 5, 6) -->
+            <div class="cards-row-2">
+              ${row2.map((letter, idx) => renderCard(letter, idx + 3, `deckle-clip-${(idx + 3) % 5}`)).join('')}
+            </div>
+
+            <!-- Archival Extension for complete 2-8 -->
+            <div style="text-align: center; margin-top: 1.5rem;">
+              <button class="nav-btn" onclick="toggleExtraCards()" style="background: rgba(210,195,170,0.45); border-radius: 9999px;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>
+                <span>${state.showExtraCards ? 'Hide Additional Letters (Frames 7 & 8)' : 'View More Archival Letters (Frames 7 & 8: Lê Văn Huỳnh & Nguyễn Văn Thạc)'}</span>
+              </button>
+            </div>
+
+            ${state.showExtraCards ? `
+              <div class="cards-row-2" style="margin-top: 1rem;">
+                ${extras.map((letter, idx) => renderCard(letter, idx + 5, `deckle-clip-${(idx + 5) % 5}`)).join('')}
+              </div>
+            ` : ''}
+          </main>
+
+          <footer class="max-w-content" style="border-top: 1px solid rgba(140,115,85,0.25); padding-top: 1rem; text-align: center; font-size: 0.75rem; color: #6e5d4e; font-family: sans-serif;">
+            Click &ldquo;Click me&rdquo; on any letter to read the full handwritten message and hear its audio soundscape
+          </footer>
+        `;
+      }
+
+      function renderCard(letter, index, clipClass) {
+        return `
+          <div class="burnt-card-wrapper" onclick="openLetter('${letter.id}')" onmouseenter="soundEngine.playPenScratch()">
+            <div class="burnt-card-inner ${clipClass}">
+              <div style="position: relative; z-index: 10;">
+                ${letter.summaryBullets.map(bullet => `
+                  <div style="display: flex; align-items: flex-start; gap: 0.6rem; margin-bottom: 0.75rem;">
+                    <span style="font-size: 1.1rem; line-height: 1; margin-top: 4px; color: #3c2a1c;">•</span>
+                    <p class="${index === 3 ? 'font-flowing-cursive' : 'font-cursive-letter'}" style="font-size: ${index === 3 ? '1.35rem' : '1.18rem'}; line-height: 1.55; color: #261d15;">
+                      ${bullet}
+                    </p>
+                  </div>
+                `).join('')}
+              </div>
+
+              <div style="display: flex; justify-content: flex-end; position: relative; z-index: 20; margin-top: 0.5rem;">
+                <span class="card-click-btn">Click me</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      // 3. LETTER DETAIL VIEW (FRAMES 2 - 8)
+      function renderLetterDetail() {
+        const letter = state.selectedLetter;
+        const currentIndex = LETTERS.findIndex(l => l.id === letter.id);
+        const hasPrev = currentIndex > 0;
+        const hasNext = currentIndex < LETTERS.length - 1;
+
+        // Font class resolver
+        let fontClass = 'font-cursive-letter';
+        if (state.fontMode === 'marck') fontClass = 'font-marck';
+        else if (state.fontMode === 'apple') fontClass = 'font-apple';
+        else if (state.fontMode === 'serif') fontClass = 'font-editorial';
+
+        return `
+          <header class="top-nav max-w-content">
+            <div style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer;" onclick="navigateTo('frame-1')">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22394c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+              <h1 class="site-title" style="margin-left: 0.25rem;">Voices of the past</h1>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <!-- Cursive Penmanship Switcher -->
+              <div class="font-switcher" style="display: none; @media(min-width:640px){display:flex;}">
+                <button class="font-switcher-btn ${state.fontMode === 'cursive' ? 'active' : ''}" onclick="setFontMode('cursive')">Letter Cursive</button>
+                <button class="font-switcher-btn ${state.fontMode === 'marck' ? 'active' : ''}" onclick="setFontMode('marck')">Poet Script</button>
+                <button class="font-switcher-btn ${state.fontMode === 'apple' ? 'active' : ''}" onclick="setFontMode('apple')">Fountain Pen</button>
+              </div>
+
+              <!-- History Context Toggle -->
+              <button class="nav-btn" onclick="toggleHistory()" style="background: ${state.showHistory ? '#78350f' : 'rgba(210,195,170,0.45)'}; color: ${state.showHistory ? '#fff' : '#4a3b2c'}; border-radius: 9999px;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                <span>History</span>
+              </button>
+
+              ${renderAudioBar()}
+            </div>
+          </header>
+
+          <main class="letter-container">
+            ${state.showHistory ? `
+              <div class="history-box">
+                <div class="history-header">
+                  <div class="history-title">Historical Background: ${letter.author}</div>
+                  <span style="font-size: 0.75rem; color: #78350f; font-family: sans-serif;">${letter.period}</span>
+                </div>
+                <p class="history-body">${letter.biography}</p>
+              </div>
+            ` : ''}
+
+            <article class="${fontClass}">
+              <!-- Header Meta Lines -->
+              <div class="letter-header-meta">
+                ${letter.fullHeader.map(hdr => `
+                  <p class="letter-header-line">${hdr}</p>
+                `).join('')}
+              </div>
+
+              <!-- Salutation if present -->
+              ${letter.salutation ? `
+                <p class="letter-salutation">${letter.salutation}</p>
+              ` : ''}
+
+              <!-- Body Paragraphs -->
+              <div>
+                ${letter.paragraphs.map((p, idx) => `
+                  <p class="letter-paragraph ${state.highlightedParagraph === idx ? 'highlighted' : ''}">${p}</p>
+                `).join('')}
+              </div>
+
+              <!-- Sign-off if present -->
+              ${letter.signOff ? `
+                <div class="letter-signoff">
+                  ${letter.signOff.split('\n').map((line, i) => `
+                    <p class="${i === 1 ? 'letter-signature' : ''}">${line}</p>
+                  `).join('')}
+                </div>
+              ` : ''}
+
+              <!-- Postscript if present -->
+              ${letter.postScript ? `
+                <div class="letter-postscript">
+                  <p>${letter.postScript}</p>
+                </div>
+              ` : ''}
+            </article>
+
+            <!-- Bottom Navigation: Prev / All / Next -->
+            <footer class="letter-footer-nav">
+              <button class="nav-btn" onclick="navigateLetter('prev')" ${!hasPrev ? 'disabled' : ''}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                <span>Previous Letter</span>
+              </button>
+
+              <button class="nav-btn" onclick="navigateTo('frame-1')">
+                All Letters (Frame 1)
+              </button>
+
+              <button class="nav-btn" onclick="navigateLetter('next')" ${!hasNext ? 'disabled' : ''}>
+                <span>Next Letter</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+              </button>
+            </footer>
+          </main>
+        `;
+      }
+
+      function renderAudioBar() {
+        const letter = state.selectedLetter;
+        const title = letter ? letter.audioTheme.title.split('(')[0] : 'Historical Ambience';
+
+        return `
+          <div class="audio-pill">
+            <span class="btn-icon" style="color: #78350f;">
+              <svg width="14" height="14" class="${state.isAudioPlaying ? 'pulse-indicator' : ''}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+            </span>
+
+            <span style="font-weight: 600; max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+              ${title}
+            </span>
+
+            <!-- Music Play/Pause -->
+            <button class="btn-icon" onclick="toggleMusic()" title="${state.isAudioPlaying ? 'Pause Music' : 'Play Music'}">
+              ${state.isAudioPlaying ? `
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="4" height="16" x="6" y="4"/><rect width="4" height="16" x="14" y="4"/></svg>
+              ` : `
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+              `}
+            </button>
+
+            <!-- Read Aloud if on letter page -->
+            ${letter ? `
+              <button class="btn-read-aloud ${state.isNarrating && !state.isNarratePaused ? 'active' : ''}" onclick="toggleNarration()">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+                <span>${state.isNarrating ? (state.isNarratePaused ? 'Resume' : 'Reading...') : 'Read Aloud'}</span>
+              </button>
+            ` : ''}
+
+            <!-- Mute Toggle -->
+            <button class="btn-icon" onclick="toggleMute()" title="${soundEngine.isMuted ? 'Unmute' : 'Mute'}">
+              ${soundEngine.isMuted ? `
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="22" x2="16" y1="9" y2="15"/><line x1="16" x2="22" y1="9" y2="15"/></svg>
+              ` : `
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+              `}
+            </button>
+          </div>
+        `;
+      }
+
+      function attachEventListeners() {
+        // Event listeners are bound directly via onclick attributes for 100% reliable standalone operation!
+      }
+
+      // --- USER ACTIONS & ROUTING ---
+      function navigateTo(viewName) {
+        soundEngine.playPaperRustle();
+        speechService.stop();
+        state.isNarrating = false;
+        state.highlightedParagraph = -1;
+
+        if (viewName === 'home') {
+          window.location.hash = 'home';
+          state.view = 'home';
+          state.selectedLetter = null;
+          soundEngine.playTheme('flute-guitar');
+          state.isAudioPlaying = true;
+        } else if (viewName === 'frame-1') {
+          window.location.hash = 'frame-1';
+          state.view = 'frame-1';
+          state.selectedLetter = null;
+          soundEngine.playTheme('flute-guitar');
+          state.isAudioPlaying = true;
+        }
+        render();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function openLetter(letterId) {
+        const found = LETTERS.find(l => l.id === letterId);
+        if (!found) return;
+        soundEngine.playPaperRustle();
+        soundEngine.playChime(660);
+        speechService.stop();
+        state.isNarrating = false;
+        state.highlightedParagraph = -1;
+
+        window.location.hash = found.id;
+        state.selectedLetter = found;
+        state.view = 'letter';
+        soundEngine.playTheme(found.audioTheme.preset);
+        state.isAudioPlaying = true;
+
+        render();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function navigateLetter(dir) {
+        if (!state.selectedLetter) return;
+        const curIdx = LETTERS.findIndex(l => l.id === state.selectedLetter.id);
+        if (dir === 'prev' && curIdx > 0) {
+          openLetter(LETTERS[curIdx - 1].id);
+        } else if (dir === 'next' && curIdx < LETTERS.length - 1) {
+          openLetter(LETTERS[curIdx + 1].id);
+        }
+      }
+
+      function toggleMusic() {
+        if (soundEngine.isMusicPlaying) {
+          soundEngine.stopTheme(true);
+          state.isAudioPlaying = false;
+        } else {
+          const preset = state.selectedLetter ? state.selectedLetter.audioTheme.preset : 'flute-guitar';
+          soundEngine.playTheme(preset);
+          state.isAudioPlaying = true;
+        }
+        render();
+      }
+
+      function toggleMute() {
+        soundEngine.toggleMute();
+        render();
+      }
+
+      function toggleHistory() {
+        state.showHistory = !state.showHistory;
+        render();
+      }
+
+      function toggleExtraCards() {
+        soundEngine.playPaperRustle();
+        state.showExtraCards = !state.showExtraCards;
+        render();
+      }
+
+      function setFontMode(mode) {
+        state.fontMode = mode;
+        render();
+      }
+
+      function toggleNarration() {
+        if (!state.selectedLetter) return;
+
+        if (state.isNarrating && state.isNarratePaused) {
+          speechService.resume();
+          state.isNarratePaused = false;
+          render();
+          return;
+        }
+        if (state.isNarrating) {
+          speechService.pause();
+          state.isNarratePaused = true;
+          render();
+          return;
+        }
+
+        const paragraphs = [
+          ...state.selectedLetter.fullHeader,
+          state.selectedLetter.salutation || '',
+          ...state.selectedLetter.paragraphs
+        ].filter(Boolean);
+
+        soundEngine.playPaperRustle();
+        state.isNarrating = true;
+        state.isNarratePaused = false;
+
+        if (!state.isAudioPlaying) {
+          soundEngine.playTheme(state.selectedLetter.audioTheme.preset);
+          state.isAudioPlaying = true;
+        }
+
+        speechService.start(
+          paragraphs,
+          (idx) => {
+            const bodyOffset = state.selectedLetter.fullHeader.length + (state.selectedLetter.salutation ? 1 : 0);
+            state.highlightedParagraph = idx >= bodyOffset ? idx - bodyOffset : -1;
+            render();
+          },
+          () => {
+            state.isNarrating = false;
+            state.isNarratePaused = false;
+            state.highlightedParagraph = -1;
+            render();
+          }
+        );
+        render();
+      }
+
+      // Hash routing
+      function handleHash() {
+        const hash = window.location.hash.replace('#', '');
+        if (!hash || hash === 'home') {
+          state.view = 'home';
+          state.selectedLetter = null;
+        } else if (hash === 'frame-1') {
+          state.view = 'frame-1';
+          state.selectedLetter = null;
+        } else if (hash.startsWith('frame-')) {
+          const found = LETTERS.find(l => l.id === hash);
+          if (found) {
+            state.selectedLetter = found;
+            state.view = 'letter';
+          } else {
+            state.view = 'frame-1';
+          }
+        }
+        render();
+      }
+
+      window.addEventListener('hashchange', handleHash);
+
+      // Keyboard navigation
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          if (state.view === 'letter') navigateTo('frame-1');
+          else if (state.view === 'frame-1') navigateTo('home');
+        } else if (state.view === 'letter') {
+          if (e.key === 'ArrowLeft') navigateLetter('prev');
+          else if (e.key === 'ArrowRight') navigateLetter('next');
+        }
+      });
+
+      // Initial boot
+      handleHash();
+    </script>
+  </body>
+</html>

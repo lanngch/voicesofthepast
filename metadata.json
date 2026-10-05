@@ -1,0 +1,6 @@
+{
+  "name": "Voices of the Past",
+  "description": "An interactive archive of poignant wartime letters and historical memories featuring authentic parchment design, curated atmospheric music, and audio narration.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

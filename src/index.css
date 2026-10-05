@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .font-script {
+    font-family: 'Caveat', 'Dancing Script', 'Marck Script', cursive;
+  }
+  .font-marck {
+    font-family: 'Marck Script', 'Bad Script', cursive;
+  }
+  .font-cursive-letter {
+    font-family: 'Bad Script', 'Marck Script', 'Caveat', cursive;
+  }
+  .font-flowing-cursive {
+    font-family: 'Marck Script', 'Homemade Apple', cursive;
+  }
+  .font-apple {
+    font-family: 'Homemade Apple', 'Marck Script', cursive;
+  }
+  .font-cedarville {
+    font-family: 'Cedarville Cursive', cursive;
+  }
+  .font-handwriting {
+    font-family: 'Bad Script', 'Marck Script', 'Caveat', cursive;
+  }
+  .font-editorial {
+    font-family: 'Source Serif 4', Georgia, serif;
+  }
+}
+
+/* Atmospheric aged parchment background with natural vignetting */
+.parchment-bg {
+  background-color: #f3ede1;
+  background-image:
+    radial-gradient(ellipse at center, rgba(255, 252, 245, 0.6) 0%, rgba(240, 230, 214, 0.4) 60%, rgba(206, 189, 163, 0.75) 100%),
+    radial-gradient(circle at 20% 30%, rgba(210, 185, 150, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 80% 75%, rgba(190, 160, 125, 0.18) 0%, transparent 45%);
+  box-shadow: inset 0 0 120px rgba(135, 105, 70, 0.22);
+}
+
+/* Burnt deckle edge effect for vintage paper cards */
+.burnt-paper {
+  background:
+    radial-gradient(circle at 50% 50%, #fbf5e6 0%, #f4e8cf 75%, #dfcdae 92%, #b58c5c 97%, #643f1e 100%);
+  position: relative;
+  box-shadow:
+    0 15px 35px -10px rgba(78, 54, 30, 0.35),
+    0 4px 12px rgba(60, 40, 20, 0.18),
+    inset 0 0 18px rgba(110, 75, 40, 0.32);
+}
+
+/* Authentic airmail envelope border stripes: Red & Navy chevron bands */
+.airmail-border {
+  background: repeating-linear-gradient(
+    135deg,
+    #2c5282 0px,
+    #2c5282 18px,
+    #fbf8ee 18px,
+    #fbf8ee 28px,
+    #b93b3b 28px,
+    #b93b3b 46px,
+    #fbf8ee 46px,
+    #fbf8ee 56px
+  );
+}
+
+/* Subtle vintage ink text shadow */
+.ink-text {
+  color: #1e3345;
+  text-shadow: 0 0.5px 1px rgba(20, 35, 50, 0.15);
+}
+
+/* Custom scrollbar matching aged parchment */
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #ecdcc6;
+}
+::-webkit-scrollbar-thumb {
+  background: #bfa585;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9f8260;
+}
